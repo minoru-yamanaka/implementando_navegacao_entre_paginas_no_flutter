@@ -1,28 +1,23 @@
-// "03 Página Login 03,\nLoginPage - Tela de Login"
+// "02 Meus Projetos 02,\n ProjetosPage - Tela de Lista de Projetos (Home)",
 import 'package:flutter/material.dart';
 import 'package:flutter_application_diego_aquila/config/app_colors.dart';
 import 'package:flutter_application_diego_aquila/config/app_text_style.dart';
-import 'package:flutter_application_diego_aquila/pages/home_page.dart';
-import 'package:flutter_application_diego_aquila/pages/home_page_2.dart';
 
 // Tela de Lista de Projetos (Home)
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ProjetosPage extends StatefulWidget {
+  const ProjetosPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ProjetosPage> createState() => _ProjetosPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ProjetosPageState extends State<ProjetosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColorPages,
       appBar: AppBar(
-        title: Text(
-          "Página Login 03,\nLoginPage 03",
-          style: AppTextStyle.titleAppBar.copyWith(fontSize: 18),
-        ),
+        title: Text("Meus Projetos", style: AppTextStyle.titleAppBar),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -49,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(width: 14),
                           Text(
-                            "Página Login 03,\nLoginPage 03",
+                            "Meus Projetos 02,\n ProjetosPage",
                             style: AppTextStyle.titleAppBar.copyWith(
                               fontSize: 18,
                             ),
@@ -64,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                         top: 10,
                       ),
                       child: Text(
-                        "Página Login 03,\nLoginPage 03",
+                        "Meus Projetos 02,\n ProjetosPage",
                         style: AppTextStyle.subtitlePages.copyWith(
                           fontSize: 16,
                           color: Colors.grey,
@@ -80,23 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                               Colors.orange,
                             ),
                           ),
-
-                          // **USANDO O NAVIGATOR.PUSH AQUI**
-                          // **AQUI: ADICIONE A NAVEGAÇÃO**
-                          onPressed: () {
-                            // Use pushReplacement para substituir a tela de login
-                            // pela tela principal, impedindo o usuário de voltar.
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyHomePage2(),
-                              ),
-                            );
-                          },
-                          child: Text("Entrar"),
-
-                          // onPressed: () {},
-                          // child: Text("Ver projeto"),
+                          onPressed: () {},
+                          child: Text("Ver projeto"),
                         ),
                       ],
                     ),

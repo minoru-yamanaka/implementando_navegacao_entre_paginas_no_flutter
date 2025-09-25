@@ -119,7 +119,10 @@ class ProfilePage extends StatelessWidget {
                         onPressed: () {},
                         child: const Text(
                           'Edit Profile',
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -137,7 +140,10 @@ class ProfilePage extends StatelessWidget {
                         onPressed: () {
                           // Ação de logout
                         },
-                        child: const Text('Logout', style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ],
