@@ -35,43 +35,6 @@ O aplicativo é composto pelas seguintes telas:
   - **[Dart](https://dart.dev/):** Linguagem de programação utilizada pelo Flutter.
   - **[Material Design](https://material.io/):** Componentes e diretrizes de design para uma experiência de usuário consistente.
 
-## ▶️ Como Executar o Projeto
-
-Siga os passos abaixo para executar o projeto em sua máquina local.
-
-**Pré-requisitos:**
-
-  - Ter o [Git](https://git-scm.com/) instalado.
-  - Ter o [SDK do Flutter](https://flutter.dev/docs/get-started/install) configurado em sua máquina.
-
-**Passo a passo:**
-
-1.  **Clone o repositório:**
-
-    ```sh
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
-    ```
-
-2.  **Navegue até o diretório do projeto:**
-
-    ```sh
-    cd nome-do-repositorio
-    ```
-
-3.  **Instale as dependências:**
-
-    ```sh
-    flutter pub get
-    ```
-
-4.  **Execute o aplicativo:**
-
-    ```sh
-    flutter run
-    ```
-
-    O aplicativo deverá ser compilado e executado em seu emulador ou dispositivo físico conectado.
-
 ## 📂 Estrutura de Arquivos
 
 A estrutura de arquivos foi organizada para separar a lógica das telas e as configurações de UI, facilitando a manutenção.
@@ -94,4 +57,128 @@ lib/
     └── exit_page.dart          # Tela com a função de sair
 ```
 
-## 📂 **[Changelog.md](/changelog.md)** 
+## 📂 **[Desenvolvimento](/changelog.md)** 
+
+Abaixo está a explicação detalhada de como o `main_screen.dart` funciona e como ele se integra com as outras telas do seu aplicativo, seguindo a estrutura de arquivos fornecida.
+
+### Entendendo o `main_screen.dart`: O Gerenciador de Navegação
+
+O arquivo `main_screen.dart` é o coração da navegação do seu aplicativo após o login. Ele não é uma tela com conteúdo próprio, mas sim um "contêiner" que gerencia e exibe outras telas com base na interação do usuário com a barra de navegação inferior (`BottomNavigationBar`).
+
+Veja como ele funciona, passo a passo:
+
+1.  **StatefulWidget**: A classe `MainScreen` é um `StatefulWidget`. Isso é essencial porque o conteúdo da tela precisa mudar sempre que o usuário toca em um ícone diferente na barra de navegação. Um `StatefulWidget` pode ter seu estado interno alterado, o que faz com que a interface do usuário seja redesenhada.
+
+2.  **`_selectedIndex`**: Esta é a variável de estado. É um número inteiro que armazena o "índice" da aba atualmente selecionada.
+
+      * `0` corresponde a 'Home' (ProjectsPage)
+      * `1` corresponde a 'Perfil' (ProfilePage)
+      * `2` corresponde a 'tela vazia'
+      * `3` corresponde a 'Sair' (ExitPage)
+
+3.  **`_widgetOptions`**: Esta é uma lista de `Widgets` (as suas telas). A ordem dos widgets nesta lista é crucial, pois corresponde diretamente aos índices do `_selectedIndex`.
+
+    ```dart
+    static const List<Widget> _widgetOptions = <Widget>[
+      ProjectsPage(),    // Índice 0
+      ProfilePage(),     // Índice 1
+      Text('tela vazia'),// Índice 2
+      ExitPage(),        // Índice 3
+    ];
+    ```
+
+4.  **`_onItemTapped(int index)`**: Esta função é o cérebro da navegação.
+
+      * Ela é chamada toda vez que o usuário toca em um item da `BottomNavigationBar`.
+      * Ela recebe o `index` do item que foi tocado.
+      * Dentro dela, `setState(() { _selectedIndex = index; });` atualiza a variável de estado. Chamar `setState` notifica o Flutter que o estado mudou, e o framework automaticamente reconstrói a interface para refletir essa mudança.
+
+5.  **`build(BuildContext context)`**: Este método constrói a interface visual.
+
+      * **`body`**: O corpo do `Scaffold` é definido como `_widgetOptions.elementAt(_selectedIndex)`. Isso significa que ele pega a tela correspondente ao índice selecionado na lista `_widgetOptions` e a exibe. Se `_selectedIndex` for `1`, ele exibirá a `ProfilePage()`.
+      * **`bottomNavigationBar`**: Aqui é onde a barra de navegação é criada.
+          * **`items`**: Define os botões/ícones que aparecerão na barra.
+          * **`currentIndex`**: Informa à barra qual item deve ser destacado como "ativo". Ele está diretamente ligado à variável `_selectedIndex`.
+          * **`onTap`**: Este é o gatilho. Ele especifica que a função `_onItemTapped` deve ser executada quando um item for tocado.
+
+### Como a Navegação Funciona no Projeto Inteiro (Implementação por Arquivo)
+
+Agora, vamos ver como a navegação flui desde o início do aplicativo até a tela de saída, com base na sua estrutura de arquivos.
+
+#### 1\. `main.dart` (Ponto de Entrada)
+
+Este é o primeiro arquivo a ser executado. Sua única responsabilidade é iniciar o aplicativo chamando o widget `MyApp`.
+
+```dart
+// lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_application_diego_aquila/app.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+```
+
+#### 2\. `app.dart` (Configuração Principal)
+
+Este arquivo configura o `MaterialApp`, que é o widget raiz do aplicativo. Ele define o tema, remove o banner de debug e, o mais importante, define a `home` como `LoginPage()`. Isso garante que a primeira tela que o usuário vê é a de login.
+
+```dart
+// lib/app.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_application_diego_aquila/pages/login_page.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Diego Áquila App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(...),
+      home: const LoginPage(), // Inicia o app na tela de login
+    );
+  }
+}
+```
+
+#### 3\. `login_page.dart` (Navegando para a Tela Principal)
+
+Aqui, o usuário interage com o botão "Acessar". A mágica acontece no `onPressed`:
+
+```dart
+// lib/pages/login_page.dart
+onPressed: () {
+  // Navega para a tela principal e REMOVE a tela de login da pilha
+  Navigator.of(context).pushReplacement(
+    MaterialPageRoute(builder: (context) => const MainScreen()),
+  );
+},
+```
+
+  * **`Navigator.of(context).pushReplacement(...)`**: Este comando navega para a `MainScreen`. A parte crucial é o `pushReplacement`. Ele substitui a tela de login pela `MainScreen` na "pilha" de navegação. Isso impede que o usuário pressione o botão "Voltar" do dispositivo e retorne para a tela de login.
+
+#### 4\. `main_screen.dart` (Gerenciando as Telas Internas)
+
+Como explicado anteriormente, uma vez que o usuário está na `MainScreen`, este widget assume o controle. Ele exibe a `ProjectsPage` por padrão (`_selectedIndex` começa em `0`) e permite que o usuário alterne entre as telas definidas em `_widgetOptions` usando a barra de navegação.
+
+#### 5\. `projects_page.dart` e `profile_page.dart` (Telas de Conteúdo)
+
+Esses são widgets `StatelessWidget` simples que apenas exibem o conteúdo estático de cada tela. Eles são as telas que o usuário vê dentro do "contêiner" da `MainScreen`.
+
+#### 6\. `exit_page.dart` (Saindo do Aplicativo)
+
+A tela de saída funciona de forma muito semelhante à tela de login, mas no sentido inverso. O botão "Sair" também usa `pushReplacement` para voltar à tela de login.
+
+```dart
+// lib/pages/exit_page.dart
+onPressed: () {
+  // Navega para a tela de login e REMOVE a tela principal da pilha
+  Navigator.of(context).pushReplacement(
+    MaterialPageRoute(builder: (context) => const LoginPage()),
+  );
+},
+```
+
+Isso efetivamente "reseta" o fluxo do aplicativo, levando o usuário de volta ao início como se ele tivesse acabado de abrir o app, sem a possibilidade de voltar para a `MainScreen`.
