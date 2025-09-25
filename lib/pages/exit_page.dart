@@ -1,33 +1,26 @@
-// "01 Página Inicial 01,\nMyHomePage - Tela de Perfil",
 import 'package:flutter/material.dart';
-import 'package:flutter_application_diego_aquila/config/app_colors.dart';
-import 'package:flutter_application_diego_aquila/config/app_text_style.dart';
+import 'package:flutter_application_diego_aquila/pages/config/app_colors.dart';
+import 'package:flutter_application_diego_aquila/pages/config/app_text_style.dart';
+import 'package:flutter_application_diego_aquila/pages/login_page.dart';
 
-// Tela de Login
-class MyHomePage2 extends StatefulWidget {
-  const MyHomePage2({super.key});
+class ExitPage extends StatelessWidget {
+  const ExitPage({super.key});
 
-  @override
-  State<MyHomePage2> createState() => _MyHomePageState2();
-}
-
-class _MyHomePageState2 extends State<MyHomePage2> {
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColorPages,
       appBar: AppBar(
-        title: Text(
-          "Página Inicial 01,\nMyHomePage",
-          style: AppTextStyle.titleAppBar.copyWith(fontSize: 18),
-        ),
+        title: Text("Sair",
+        style: AppTextStyle.titleAppBar.copyWith(fontSize: 18),
+       ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Efeito borboleta", style: AppTextStyle.subtitlePages),
+            Text("Sair", style: AppTextStyle.subtitlePages),
             Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -47,9 +40,9 @@ class _MyHomePageState2 extends State<MyHomePage2> {
                           ),
                           SizedBox(width: 14),
                           Text(
-                            "Página Inicial 01,\nMyHomePage",
+                            "Sair",
                             style: AppTextStyle.titleAppBar.copyWith(
-                              fontSize: 25,
+                              fontSize: 18,
                             ),
                           ),
                         ],
@@ -62,7 +55,7 @@ class _MyHomePageState2 extends State<MyHomePage2> {
                         top: 10,
                       ),
                       child: Text(
-                        "Página Inicial 01,\nMyHomePage",
+                        "Sair",
                         style: AppTextStyle.subtitlePages.copyWith(
                           fontSize: 16,
                           color: Colors.grey,
@@ -78,8 +71,13 @@ class _MyHomePageState2 extends State<MyHomePage2> {
                               Colors.orange,
                             ),
                           ),
-                          onPressed: () {},
-                          child: Text("Ver projeto"),
+                          onPressed: () {
+                              // Navega para a tela principal e remove a tela de login da pilha
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => const LoginPage()),
+                              );
+                            },
+                          child: Text("Sair"),
                         ),
                       ],
                     ),
@@ -93,3 +91,5 @@ class _MyHomePageState2 extends State<MyHomePage2> {
     );
   }
 }
+
+

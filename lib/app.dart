@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_diego_aquila/pages/home_page.dart'
+import 'package:flutter_application_diego_aquila/pages/config/main_screen.dart';
 import 'package:flutter_application_diego_aquila/pages/login_page.dart';
+// import 'package:flutter_application_diego_aquila/pages/home_page.dart'
+// import 'package:flutter_application_diego_aquila/pages/login_page.dart'
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Roboto',
       ),
+      //home: const Login(),
       home: const LoginPage(),
     );
   }

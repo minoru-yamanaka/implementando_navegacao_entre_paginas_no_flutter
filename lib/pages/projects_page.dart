@@ -1,30 +1,25 @@
-// "02 Meus Projetos 02,\n ProjetosPage - Tela de Lista de Projetos (Home)",
 import 'package:flutter/material.dart';
-import 'package:flutter_application_diego_aquila/config/app_colors.dart';
-import 'package:flutter_application_diego_aquila/config/app_text_style.dart';
+import 'package:flutter_application_diego_aquila/pages/config/app_colors.dart';
+import 'package:flutter_application_diego_aquila/pages/config/app_text_style.dart';
 
-// Tela de Lista de Projetos (Home)
-class ProjetosPage extends StatefulWidget {
-  const ProjetosPage({super.key});
+class ProjectsPage extends StatelessWidget {
+  const ProjectsPage({super.key});
 
-  @override
-  State<ProjetosPage> createState() => _ProjetosPageState();
-}
-
-class _ProjetosPageState extends State<ProjetosPage> {
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColorPages,
       appBar: AppBar(
-        title: Text("Meus Projetos", style: AppTextStyle.titleAppBar),
+        title: Text("Home",
+        style: AppTextStyle.titleAppBar.copyWith(fontSize: 18),
+       ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Efeito borboleta", style: AppTextStyle.subtitlePages),
+            Text("Home", style: AppTextStyle.subtitlePages),
             Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -44,7 +39,7 @@ class _ProjetosPageState extends State<ProjetosPage> {
                           ),
                           SizedBox(width: 14),
                           Text(
-                            "Meus Projetos 02,\n ProjetosPage",
+                            "Home",
                             style: AppTextStyle.titleAppBar.copyWith(
                               fontSize: 18,
                             ),
@@ -59,7 +54,7 @@ class _ProjetosPageState extends State<ProjetosPage> {
                         top: 10,
                       ),
                       child: Text(
-                        "Meus Projetos 02,\n ProjetosPage",
+                        "Home",
                         style: AppTextStyle.subtitlePages.copyWith(
                           fontSize: 16,
                           color: Colors.grey,
@@ -76,7 +71,7 @@ class _ProjetosPageState extends State<ProjetosPage> {
                             ),
                           ),
                           onPressed: () {},
-                          child: Text("Ver projeto"),
+                          child: Text("Home"),
                         ),
                       ],
                     ),

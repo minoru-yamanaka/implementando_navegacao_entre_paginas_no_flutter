@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_diego_aquila/pages/config/app_colors.dart';
 import 'package:flutter_application_diego_aquila/pages/config/app_text_style.dart';
-import 'config/main_screen.dart'; 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
 
-@override
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColorPages,
       appBar: AppBar(
-        title: Text("Acessar",
+        title: Text("Perfil",
         style: AppTextStyle.titleAppBar.copyWith(fontSize: 18),
        ),
       ),
@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Acessar", style: AppTextStyle.subtitlePages),
+            Text("Perfil", style: AppTextStyle.subtitlePages),
             Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           SizedBox(width: 14),
                           Text(
-                            "Acessar",
+                            "Perfil",
                             style: AppTextStyle.titleAppBar.copyWith(
                               fontSize: 18,
                             ),
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                         top: 10,
                       ),
                       child: Text(
-                        "Acessar",
+                        "Perfil",
                         style: AppTextStyle.subtitlePages.copyWith(
                           fontSize: 16,
                           color: Colors.grey,
@@ -70,13 +70,8 @@ class LoginPage extends StatelessWidget {
                               Colors.orange,
                             ),
                           ),
-                          onPressed: () {
-                              // Navega para a tela principal e remove a tela de login da pilha
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => const MainScreen()),
-                              );
-                            },
-                          child: Text("Acessar"),
+                          onPressed: () {},
+                          child: Text("Perfil"),
                         ),
                       ],
                     ),
@@ -90,5 +85,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
 
