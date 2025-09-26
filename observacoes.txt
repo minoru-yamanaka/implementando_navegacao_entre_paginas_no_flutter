@@ -1,0 +1,22 @@
+# 1. Atualizar a main
+git checkout main
+git pull origin main
+
+# 2. Criar e ir para a nova branch
+git checkout -b developer
+
+# 3. Fazer alterações, adicionar e commitar
+# ... (faça seu trabalho no código) ...
+git add .
+git commit -m "Adiciona nova funcionalidade X"
+
+# 4. Subir a nova branch
+git push -u origin developer
+
+# 5. Voltar para a main e fazer o merge
+git checkout main
+git pull origin main
+git merge developer
+
+# 6. Subir a main atualizada
+git push origin main
