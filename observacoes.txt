@@ -20,3 +20,6 @@ git merge developer
 
 # 6. Subir a main atualizada
 git push origin main
+
+# 7. Para baixar dependências 
+flutter pub get
